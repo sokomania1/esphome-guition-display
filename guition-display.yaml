@@ -1,0 +1,70 @@
+# guition-display.yaml
+# Hauptkonfiguration für Guition ESP32-S3 3.5" Display
+
+esphome:
+  name: guition-display
+  friendly_name: Guition Display
+  platformio_options:
+    board_build.flash_mode: dio
+    board_build.mcu: esp32s3
+
+esp32:
+  board: esp32-s3-devkitc-1
+  variant: esp32s3
+  framework:
+    type: esp-idf
+    version: recommended
+    sdkconfig_options:
+      CONFIG_ESP32S3_DEFAULT_CPU_FREQ_240: "y"
+      CONFIG_ESP32S3_DATA_CACHE_64KB: "y"
+      CONFIG_ESP32S3_DATA_CACHE_LINE_64B: "y"
+      CONFIG_SPIRAM_FETCH_INSTRUCTIONS: y
+      CONFIG_SPIRAM_RODATA: y
+
+psram:
+  mode: octal
+  speed: 80MHz
+
+substitutions:
+  # Startseite beim Booten
+  home_page: "page_lights"
+
+# Gemeinsame Konfiguration
+packages:
+  common: !include common.yaml
+  device: !include devices/JC3248W535.yaml
+  layout: !include layouts/480x320.yaml
+  
+  # Seiten
+  lights: !include pages/lights.yaml
+  heating: !include pages/heating.yaml
+  weather: !include pages/weather.yaml
+
+# WLAN
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+  
+  # Fallback Access Point
+  ap:
+    ssid: "Guition-Display"
+    password: "12345678"
+
+# Captive Portal für WiFi-Setup
+captive_portal:
+
+# Home Assistant API
+api:
+  encryption:
+    key: !secret api_encryption_key
+
+# OTA Updates
+ota:
+  - platform: esphome
+    password: !secret ota_password
+
+# Logger
+logger:
+  level: INFO
+  logs:
+    component: ERROR

@@ -1,0 +1,77 @@
+# common.yaml
+# Gemeinsame Konfiguration für alle Displays
+
+# Status LED (optional)
+status_led:
+  pin:
+    number: GPIO38
+    inverted: true
+
+# Time Sensor für Uhrzeit
+time:
+  - platform: homeassistant
+    id: ha_time
+    timezone: Europe/Berlin
+
+# Text Sensoren für Formatierung
+text_sensor:
+  - platform: template
+    name: "Current Time Badge"
+    id: current_time_badge
+    update_interval: 1s
+    lambda: |-
+      auto time = id(ha_time).now();
+      return str_sprintf("%02d:%02d", time.hour, time.minute);
+  
+  - platform: template
+    name: "Current Date"
+    id: current_date
+    update_interval: 60s
+    lambda: |-
+      auto time = id(ha_time).now();
+      static const char * const months[] = {"Jan", "Feb", "Mär", "Apr", "Mai", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Dez"};
+      return str_sprintf("%02d. %s %04d", time.day_of_month, months[time.month-1], time.year);
+
+# WiFi Signal Sensor
+sensor:
+  - platform: wifi_signal
+    name: "WiFi Signal"
+    id: wifi_signal_db
+    update_interval: 60s
+  
+  - platform: template
+    name: "WiFi Strength"
+    id: wifi_strength
+    unit_of_measurement: "%"
+    update_interval: 60s
+    lambda: |-
+      if (id(wifi_signal_db).state) {
+        return min(max(2 * (id(wifi_signal_db).state + 100.0), 0.0), 100.0);
+      } else {
+        return 0.0;
+      }
+
+# WiFi Info
+text_sensor:
+  - platform: wifi_info
+    ssid:
+      name: "Connected SSID"
+      id: connected_ssid
+    mac_address:
+      name: "Mac Address"
+      id: mac_address
+    ip_address:
+      name: "IP Address"
+      id: ip_address
+
+# Restart Switch
+switch:
+  - platform: restart
+    name: "Restart"
+    id: restart_switch
+
+# Connection Status
+binary_sensor:
+  - platform: status
+    name: "Status"
+    id: system_status
