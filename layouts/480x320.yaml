@@ -1,0 +1,129 @@
+# 480x320.yaml
+# LVGL Layout-Definitionen für 480x320 Display
+
+lvgl:
+  log_level: INFO
+  
+  # Farb-Definitionen
+  color_depth: 16
+  bg_color: 0x000000
+  text_color: 0xFFFFFF
+  
+  # Touchscreen
+  touchscreens:
+    - touchscreen_id: touch_screen
+      long_press_time: 500ms
+      long_press_repeat_time: 200ms
+  
+  # Display Buffer
+  buffer_size: 25%
+  
+  # Schriftarten (Material Design Icons + Roboto)
+  font_definitions:
+    - file: "https://github.com/google/material-design-icons/raw/master/font/MaterialIcons-Regular.ttf"
+      id: material_icons_48
+      size: 48
+      glyphs: [
+        "\U0000e3a9",  # lightbulb_outline
+        "\U0000e8ac",  # wb_sunny
+        "\U0000e2bf",  # ac_unit (heating)
+        "\U0000e8b5",  # wb_cloudy
+        "\U0000e429",  # home
+        "\U0000e5d2",  # power_settings_new
+        "\U0000e5cd",  # brightness_high
+        "\U0000e5cc",  # brightness_low
+      ]
+    
+    - file: "https://github.com/google/material-design-icons/raw/master/font/MaterialIcons-Regular.ttf"
+      id: material_icons_24
+      size: 24
+      glyphs: [
+        "\U0000e3a9",  # lightbulb_outline
+        "\U0000e8ac",  # wb_sunny
+        "\U0000e2bf",  # ac_unit
+        "\U0000e8b5",  # wb_cloudy
+        "\U0000e896",  # arrow_back
+        "\U0000e5cc",  # brightness_low
+        "\U0000e5cd",  # brightness_high
+        "\U0000e894",  # arrow_forward
+      ]
+    
+    - file: "gfonts://Roboto"
+      id: roboto_24
+      size: 24
+      bpp: 4
+    
+    - file: "gfonts://Roboto"
+      id: roboto_20
+      size: 20
+      bpp: 4
+    
+    - file: "gfonts://Roboto"
+      id: roboto_16
+      size: 16
+      bpp: 4
+    
+    - file: "gfonts://Roboto@700"
+      id: roboto_bold_32
+      size: 32
+      bpp: 4
+    
+    - file: "gfonts://Roboto@700"
+      id: roboto_bold_24
+      size: 24
+      bpp: 4
+  
+  # Top Bar (Header) - wird auf allen Seiten angezeigt
+  top_layer:
+    widgets:
+      - obj:
+          id: header_bar
+          x: 0
+          y: 0
+          width: 480
+          height: 40
+          bg_color: 0x1a1a1a
+          border_width: 0
+          pad_all: 5
+          widgets:
+            # Uhrzeit links
+            - label:
+                id: time_label
+                x: 10
+                y: 5
+                text_font: roboto_bold_24
+                text_color: 0xFFFFFF
+                text: "00:00"
+            
+            # Seitentitel mittig
+            - label:
+                id: page_title
+                align: CENTER
+                text_font: roboto_20
+                text_color: 0xAAAAAA
+                text: "Lampen"
+            
+            # WiFi Signal rechts
+            - label:
+                id: wifi_label
+                x: 430
+                y: 5
+                text_font: roboto_16
+                text_color: 0xAAAAAA
+                text: "•••"
+  
+  # Update-Timer für Header
+  on_idle:
+    timeout: 1s
+    then:
+      - lvgl.label.update:
+          id: time_label
+          text: !lambda return id(current_time_badge).state.c_str();
+      - lvgl.label.update:
+          id: wifi_label
+          text: !lambda |-
+            int strength = (int)id(wifi_strength).state;
+            if (strength > 75) return "███";
+            if (strength > 50) return "██░";
+            if (strength > 25) return "█░░";
+            return "░░░";

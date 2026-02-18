@@ -1,0 +1,53 @@
+# JC3248W535.yaml
+# Hardware-Konfiguration für Guition ESP32-S3 3.5" Display
+
+spi:
+  - id: tft_spi
+    clk_pin: GPIO48
+    mosi_pin: GPIO47
+    miso_pin: GPIO41
+
+i2c:
+  - id: touch_i2c
+    sda: GPIO6
+    scl: GPIO5
+    scan: true
+
+display:
+  - platform: ili9xxx
+    id: tft_display
+    model: ST7796
+    spi_id: tft_spi
+    cs_pin: GPIO39
+    dc_pin: GPIO7
+    reset_pin: GPIO48
+    rotation: 0
+    dimensions:
+      width: 480
+      height: 320
+    auto_clear_enabled: false
+    update_interval: never
+
+touchscreen:
+  - platform: gt911
+    id: touch_screen
+    i2c_id: touch_i2c
+    interrupt_pin: GPIO4
+    on_touch:
+      - lambda: |-
+          ESP_LOGI("touch", "Touch at (%d, %d)", touch.x, touch.y);
+
+# Backlight PWM
+output:
+  - platform: ledc
+    pin: GPIO45
+    id: backlight_pwm
+    frequency: 1000Hz
+
+light:
+  - platform: monochromatic
+    output: backlight_pwm
+    name: "Backlight"
+    id: display_backlight
+    default_transition_length: 250ms
+    restore_mode: RESTORE_DEFAULT_ON
