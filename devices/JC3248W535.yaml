@@ -20,7 +20,7 @@ display:
     spi_id: tft_spi
     cs_pin: GPIO39
     dc_pin: GPIO7
-    reset_pin: GPIO48
+    reset_pin: GPIO21
     rotation: 0
     dimensions:
       width: 480
