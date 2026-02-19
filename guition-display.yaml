@@ -7,6 +7,15 @@ esphome:
   platformio_options:
     board_build.flash_mode: dio
     board_build.mcu: esp32s3
+  on_boot:
+    priority: 600
+    then:
+      # Backlight einschalten
+      - light.turn_on:
+          id: display_backlight
+          brightness: 80%
+      # Startseite laden
+      - lvgl.page.show: ${home_page}
 
 esp32:
   board: esp32-s3-devkitc-1
