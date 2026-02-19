@@ -4,6 +4,10 @@
 lvgl:
   log_level: INFO
   
+  # Display-Zuordnung
+  displays:
+    - display_id: tft_display
+  
   # Farb-Definitionen
   color_depth: 16
   bg_color: 0x000000
@@ -111,10 +115,10 @@ lvgl:
                 text_font: roboto_16
                 text_color: 0xAAAAAA
                 text: "•••"
-  
-  # Update-Timer für Header
-  on_idle:
-    timeout: 1s
+
+# Update-Timer für Header (ersetzt on_idle)
+interval:
+  - interval: 1s
     then:
       - lvgl.label.update:
           id: time_label
