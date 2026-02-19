@@ -1,12 +1,66 @@
 # 480x320.yaml
 # LVGL Layout-Definitionen für 480x320 Display
 
+# Schriftarten (außerhalb von LVGL)
+font:
+  - file: "https://github.com/google/material-design-icons/raw/master/font/MaterialIcons-Regular.ttf"
+    id: material_icons_48
+    size: 48
+    glyphs: [
+      "\U0000e3a9",  # lightbulb_outline
+      "\U0000e8ac",  # wb_sunny
+      "\U0000e2bf",  # ac_unit (heating)
+      "\U0000e8b5",  # wb_cloudy
+      "\U0000e429",  # home
+      "\U0000e5d2",  # power_settings_new
+      "\U0000e5cd",  # brightness_high
+      "\U0000e5cc",  # brightness_low
+    ]
+  
+  - file: "https://github.com/google/material-design-icons/raw/master/font/MaterialIcons-Regular.ttf"
+    id: material_icons_24
+    size: 24
+    glyphs: [
+      "\U0000e3a9",  # lightbulb_outline
+      "\U0000e8ac",  # wb_sunny
+      "\U0000e2bf",  # ac_unit
+      "\U0000e8b5",  # wb_cloudy
+      "\U0000e896",  # arrow_back
+      "\U0000e5cc",  # brightness_low
+      "\U0000e5cd",  # brightness_high
+      "\U0000e894",  # arrow_forward
+    ]
+  
+  - file: "gfonts://Roboto"
+    id: roboto_24
+    size: 24
+    bpp: 4
+  
+  - file: "gfonts://Roboto"
+    id: roboto_20
+    size: 20
+    bpp: 4
+  
+  - file: "gfonts://Roboto"
+    id: roboto_16
+    size: 16
+    bpp: 4
+  
+  - file: "gfonts://Roboto@700"
+    id: roboto_bold_32
+    size: 32
+    bpp: 4
+  
+  - file: "gfonts://Roboto@700"
+    id: roboto_bold_24
+    size: 24
+    bpp: 4
+
 lvgl:
   log_level: INFO
   
-  # Display-Zuordnung
-  displays:
-    - display_id: tft_display
+  # Display-Zuordnung (korrigierte Syntax)
+  display: tft_display
   
   # Farb-Definitionen
   color_depth: 16
@@ -21,61 +75,6 @@ lvgl:
   
   # Display Buffer
   buffer_size: 25%
-  
-  # Schriftarten (Material Design Icons + Roboto)
-  font_definitions:
-    - file: "https://github.com/google/material-design-icons/raw/master/font/MaterialIcons-Regular.ttf"
-      id: material_icons_48
-      size: 48
-      glyphs: [
-        "\U0000e3a9",  # lightbulb_outline
-        "\U0000e8ac",  # wb_sunny
-        "\U0000e2bf",  # ac_unit (heating)
-        "\U0000e8b5",  # wb_cloudy
-        "\U0000e429",  # home
-        "\U0000e5d2",  # power_settings_new
-        "\U0000e5cd",  # brightness_high
-        "\U0000e5cc",  # brightness_low
-      ]
-    
-    - file: "https://github.com/google/material-design-icons/raw/master/font/MaterialIcons-Regular.ttf"
-      id: material_icons_24
-      size: 24
-      glyphs: [
-        "\U0000e3a9",  # lightbulb_outline
-        "\U0000e8ac",  # wb_sunny
-        "\U0000e2bf",  # ac_unit
-        "\U0000e8b5",  # wb_cloudy
-        "\U0000e896",  # arrow_back
-        "\U0000e5cc",  # brightness_low
-        "\U0000e5cd",  # brightness_high
-        "\U0000e894",  # arrow_forward
-      ]
-    
-    - file: "gfonts://Roboto"
-      id: roboto_24
-      size: 24
-      bpp: 4
-    
-    - file: "gfonts://Roboto"
-      id: roboto_20
-      size: 20
-      bpp: 4
-    
-    - file: "gfonts://Roboto"
-      id: roboto_16
-      size: 16
-      bpp: 4
-    
-    - file: "gfonts://Roboto@700"
-      id: roboto_bold_32
-      size: 32
-      bpp: 4
-    
-    - file: "gfonts://Roboto@700"
-      id: roboto_bold_24
-      size: 24
-      bpp: 4
   
   # Top Bar (Header) - wird auf allen Seiten angezeigt
   top_layer:
