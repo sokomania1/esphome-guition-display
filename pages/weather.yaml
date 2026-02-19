@@ -39,7 +39,8 @@ sensor:
     on_value:
       - lvgl.label.update:
           id: label_weather_temp
-          text: !lambda return str_sprintf("%.1f°C", x);
+          text: !lambda |-
+            return str_sprintf("%.1f°C", x);
   
   # Luftfeuchtigkeit
   - platform: homeassistant
@@ -49,7 +50,8 @@ sensor:
     on_value:
       - lvgl.label.update:
           id: label_weather_humidity
-          text: !lambda return str_sprintf("💧 %.0f%%", x);
+          text: !lambda |-
+            return str_sprintf("💧 %.0f%%", x);
   
   # Windgeschwindigkeit
   - platform: homeassistant
@@ -59,7 +61,8 @@ sensor:
     on_value:
       - lvgl.label.update:
           id: label_weather_wind
-          text: !lambda return str_sprintf("🌬️ %.1f km/h", x);
+          text: !lambda |-
+            return str_sprintf("🌬️ %.1f km/h", x);
   
   # Niederschlagswahrscheinlichkeit
   - platform: homeassistant
@@ -69,7 +72,8 @@ sensor:
     on_value:
       - lvgl.label.update:
           id: label_weather_precipitation
-          text: !lambda return str_sprintf("☔ %.0f%%", x);
+          text: !lambda |-
+            return str_sprintf("☔ %.0f%%", x);
   
   # Außentemperatur vom SNF Sensor
   - platform: homeassistant
@@ -79,7 +83,9 @@ sensor:
     on_value:
       - lvgl.label.update:
           id: label_outdoor_temp
-          text: !lambda return str_sprintf("Draußen: %.1f°C", x);
+          text: !lambda |-
+            return str_sprintf("
+            Draußen: %.1f°C", x);
   
   # Außenluftfeuchtigkeit
   - platform: homeassistant
@@ -89,7 +95,8 @@ sensor:
     on_value:
       - lvgl.label.update:
           id: label_outdoor_humidity
-          text: !lambda return str_sprintf("💧 %.0f%%", x);
+          text: !lambda |-
+            return str_sprintf("💧 %.0f%%", x);
 
 # LVGL Seite
 lvgl:
@@ -266,7 +273,8 @@ sensor:
     on_value:
       - lvgl.label.update:
           id: label_indoor_wohnzimmer
-          text: !lambda return str_sprintf("%.1f°C", x);
+          text: !lambda |-
+            return str_sprintf("%.1f°C", x);
   
   - platform: homeassistant
     entity_id: sensor.snf_markus_temperature
@@ -275,7 +283,8 @@ sensor:
     on_value:
       - lvgl.label.update:
           id: label_indoor_markus
-          text: !lambda return str_sprintf("%.1f°C", x);
+          text: !lambda |-
+            return str_sprintf("%.1f°C", x);
   
   - platform: homeassistant
     entity_id: sensor.snf_schlafzimmer_temperature
@@ -284,4 +293,5 @@ sensor:
     on_value:
       - lvgl.label.update:
           id: label_indoor_schlafzimmer
-          text: !lambda return str_sprintf("%.1f°C", x);
+          text: !lambda |-
+            return str_sprintf("%.1f°C", x);
