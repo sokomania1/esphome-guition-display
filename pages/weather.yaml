@@ -29,6 +29,7 @@ text_sensor:
             if (state == "windy-variant") return "🌬️ Windig";
             return state.c_str();
 
+# Alle Sensoren in einem Block
 sensor:
   # Aktuelle Temperatur
   - platform: homeassistant
@@ -84,8 +85,7 @@ sensor:
       - lvgl.label.update:
           id: label_outdoor_temp
           text: !lambda |-
-            return str_sprintf("
-            Draußen: %.1f°C", x);
+            return str_sprintf("Draußen: %.1f°C", x);
   
   # Außenluftfeuchtigkeit
   - platform: homeassistant
@@ -97,6 +97,37 @@ sensor:
           id: label_outdoor_humidity
           text: !lambda |-
             return str_sprintf("💧 %.0f%%", x);
+  
+  # Innentemperaturen für Vergleich
+  - platform: homeassistant
+    entity_id: sensor.sn_wohnzimmer_temperatur_temperature
+    id: indoor_wohnzimmer
+    internal: true
+    on_value:
+      - lvgl.label.update:
+          id: label_indoor_wohnzimmer
+          text: !lambda |-
+            return str_sprintf("%.1f°C", x);
+  
+  - platform: homeassistant
+    entity_id: sensor.snf_markus_temperature
+    id: indoor_markus
+    internal: true
+    on_value:
+      - lvgl.label.update:
+          id: label_indoor_markus
+          text: !lambda |-
+            return str_sprintf("%.1f°C", x);
+  
+  - platform: homeassistant
+    entity_id: sensor.snf_schlafzimmer_temperature
+    id: indoor_schlafzimmer
+    internal: true
+    on_value:
+      - lvgl.label.update:
+          id: label_indoor_schlafzimmer
+          text: !lambda |-
+            return str_sprintf("%.1f°C", x);
 
 # LVGL Seite
 lvgl:
@@ -263,35 +294,3 @@ lvgl:
         - lvgl.label.update:
             id: page_title
             text: "☁️ Wetter"
-
-# Innentemperaturen für Vergleich
-sensor:
-  - platform: homeassistant
-    entity_id: sensor.sn_wohnzimmer_temperatur_temperature
-    id: indoor_wohnzimmer
-    internal: true
-    on_value:
-      - lvgl.label.update:
-          id: label_indoor_wohnzimmer
-          text: !lambda |-
-            return str_sprintf("%.1f°C", x);
-  
-  - platform: homeassistant
-    entity_id: sensor.snf_markus_temperature
-    id: indoor_markus
-    internal: true
-    on_value:
-      - lvgl.label.update:
-          id: label_indoor_markus
-          text: !lambda |-
-            return str_sprintf("%.1f°C", x);
-  
-  - platform: homeassistant
-    entity_id: sensor.snf_schlafzimmer_temperature
-    id: indoor_schlafzimmer
-    internal: true
-    on_value:
-      - lvgl.label.update:
-          id: label_indoor_schlafzimmer
-          text: !lambda |-
-            return str_sprintf("%.1f°C", x);
