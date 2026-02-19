@@ -1,10 +1,10 @@
 # common.yaml
 # Gemeinsame Konfiguration für alle Displays
 
-# Status LED (optional)
+# Status LED (optional) - GPIO2 statt GPIO38 wegen Touchscreen
 status_led:
   pin:
-    number: GPIO38
+    number: GPIO2
     inverted: true
 
 # Time Sensor für Uhrzeit
