@@ -23,7 +23,7 @@ binary_sensor:
       - lvgl.widget.update:
           id: btn_alle_lichter
           bg_color: !lambda |-
-            return x ? 0xFFAA00 : 0x333333;
+            return lv_color_hex(x ? 0xFFAA00 : 0x333333);
   
   - platform: homeassistant
     entity_id: light.stehlampe_bibi
@@ -33,7 +33,7 @@ binary_sensor:
       - lvgl.widget.update:
           id: btn_stehlampe_bibi
           bg_color: !lambda |-
-            return x ? 0xFFAA00 : 0x333333;
+            return lv_color_hex(x ? 0xFFAA00 : 0x333333);
   
   - platform: homeassistant
     entity_id: light.garderobe_licht
@@ -43,7 +43,7 @@ binary_sensor:
       - lvgl.widget.update:
           id: btn_garderobe
           bg_color: !lambda |-
-            return x ? 0xFFAA00 : 0x333333;
+            return lv_color_hex(x ? 0xFFAA00 : 0x333333);
   
   - platform: homeassistant
     entity_id: light.licht_wohnzimmerschrank
@@ -53,7 +53,7 @@ binary_sensor:
       - lvgl.widget.update:
           id: btn_wohnzimmer
           bg_color: !lambda |-
-            return x ? 0xFFAA00 : 0x333333;
+            return lv_color_hex(x ? 0xFFAA00 : 0x333333);
   
   - platform: homeassistant
     entity_id: light.esszimmer_licht
@@ -63,7 +63,7 @@ binary_sensor:
       - lvgl.widget.update:
           id: btn_esszimmer
           bg_color: !lambda |-
-            return x ? 0xFFAA00 : 0x333333;
+            return lv_color_hex(x ? 0xFFAA00 : 0x333333);
   
   - platform: homeassistant
     entity_id: light.kuchen_unterlicht
@@ -73,7 +73,7 @@ binary_sensor:
       - lvgl.widget.update:
           id: btn_kueche
           bg_color: !lambda |-
-            return x ? 0xFFAA00 : 0x333333;
+            return lv_color_hex(x ? 0xFFAA00 : 0x333333);
   
   - platform: homeassistant
     entity_id: light.kajplats_e27_ws_globe_470lm
@@ -83,7 +83,7 @@ binary_sensor:
       - lvgl.widget.update:
           id: btn_flur
           bg_color: !lambda |-
-            return x ? 0xFFAA00 : 0x333333;
+            return lv_color_hex(x ? 0xFFAA00 : 0x333333);
   
   - platform: homeassistant
     entity_id: light.licht_aktenschrank_markus
@@ -93,7 +93,7 @@ binary_sensor:
       - lvgl.widget.update:
           id: btn_aktenschrank
           bg_color: !lambda |-
-            return x ? 0xFFAA00 : 0x333333;
+            return lv_color_hex(x ? 0xFFAA00 : 0x333333);
   
   - platform: homeassistant
     entity_id: light.bibis_ecke_licht
@@ -103,7 +103,7 @@ binary_sensor:
       - lvgl.widget.update:
           id: btn_bibis_ecke
           bg_color: !lambda |-
-            return x ? 0xFFAA00 : 0x333333;
+            return lv_color_hex(x ? 0xFFAA00 : 0x333333);
 
 # LVGL Seite
 lvgl:
