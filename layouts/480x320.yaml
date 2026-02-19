@@ -59,8 +59,9 @@ font:
 lvgl:
   log_level: INFO
   
-  # Display-Zuordnung (korrigierte Syntax)
-  display: tft_display
+  # Display-Zuordnung
+  displays:
+    - tft_display
   
   # Farb-Definitionen
   color_depth: 16
