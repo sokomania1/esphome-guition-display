@@ -13,7 +13,7 @@ time:
     id: ha_time
     timezone: Europe/Berlin
 
-# Text Sensoren für Formatierung
+# Text Sensoren für Formatierung und WiFi Info
 text_sensor:
   - platform: template
     name: "Current Time Badge"
@@ -31,6 +31,17 @@ text_sensor:
       auto time = id(ha_time).now();
       static const char * const months[] = {"Jan", "Feb", "Mär", "Apr", "Mai", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Dez"};
       return str_sprintf("%02d. %s %04d", time.day_of_month, months[time.month-1], time.year);
+  
+  - platform: wifi_info
+    ssid:
+      name: "Connected SSID"
+      id: connected_ssid
+    mac_address:
+      name: "Mac Address"
+      id: mac_address
+    ip_address:
+      name: "IP Address"
+      id: ip_address
 
 # WiFi Signal Sensor
 sensor:
@@ -50,19 +61,6 @@ sensor:
       } else {
         return 0.0;
       }
-
-# WiFi Info
-text_sensor:
-  - platform: wifi_info
-    ssid:
-      name: "Connected SSID"
-      id: connected_ssid
-    mac_address:
-      name: "Mac Address"
-      id: mac_address
-    ip_address:
-      name: "IP Address"
-      id: ip_address
 
 # Restart Switch
 switch:
