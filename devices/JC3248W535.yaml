@@ -22,6 +22,7 @@ display:
     dc_pin: GPIO7
     reset_pin: GPIO21
     rotation: 0
+    invert_colors: false
     dimensions:
       width: 480
       height: 320
