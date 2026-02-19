@@ -12,7 +12,8 @@ sensor:
     on_value:
       - lvgl.label.update:
           id: label_wohnzimmer_current
-          text: !lambda return str_sprintf("%.1f°C", x);
+          text: !lambda |-
+            return str_sprintf("%.1f°C", x);
   
   - platform: homeassistant
     entity_id: climate.wohnzimmer_heizung
@@ -22,10 +23,12 @@ sensor:
     on_value:
       - lvgl.label.update:
           id: label_wohnzimmer_target
-          text: !lambda return str_sprintf("Soll: %.1f°C", x);
+          text: !lambda |-
+            return str_sprintf("Soll: %.1f°C", x);
       - lvgl.slider.update:
           id: slider_wohnzimmer
-          value: !lambda return x;
+          value: !lambda |-
+            return x;
   
   - platform: homeassistant
     entity_id: sensor.wohnzimmer_heizung_battery
@@ -34,7 +37,8 @@ sensor:
     on_value:
       - lvgl.label.update:
           id: label_wohnzimmer_battery
-          text: !lambda return str_sprintf("🔋 %.0f%%", x);
+          text: !lambda |-
+            return str_sprintf("🔋 %.0f%%", x);
   
   # Büro Markus
   - platform: homeassistant
@@ -45,7 +49,8 @@ sensor:
     on_value:
       - lvgl.label.update:
           id: label_markus_current
-          text: !lambda return str_sprintf("%.1f°C", x);
+          text: !lambda |-
+            return str_sprintf("%.1f°C", x);
   
   - platform: homeassistant
     entity_id: climate.buro_markus_heizung
@@ -55,10 +60,12 @@ sensor:
     on_value:
       - lvgl.label.update:
           id: label_markus_target
-          text: !lambda return str_sprintf("Soll: %.1f°C", x);
+          text: !lambda |-
+            return str_sprintf("Soll: %.1f°C", x);
       - lvgl.slider.update:
           id: slider_markus
-          value: !lambda return x;
+          value: !lambda |-
+            return x;
   
   - platform: homeassistant
     entity_id: sensor.buro_markus_heizung_battery
@@ -67,7 +74,8 @@ sensor:
     on_value:
       - lvgl.label.update:
           id: label_markus_battery
-          text: !lambda return str_sprintf("🔋 %.0f%%", x);
+          text: !lambda |-
+            return str_sprintf("🔋 %.0f%%", x);
   
   # Schlafzimmer
   - platform: homeassistant
@@ -78,7 +86,8 @@ sensor:
     on_value:
       - lvgl.label.update:
           id: label_schlafzimmer_current
-          text: !lambda return str_sprintf("%.1f°C", x);
+          text: !lambda |-
+            return str_sprintf("%.1f°C", x);
   
   - platform: homeassistant
     entity_id: climate.schlafzimmer_heizung
@@ -88,10 +97,12 @@ sensor:
     on_value:
       - lvgl.label.update:
           id: label_schlafzimmer_target
-          text: !lambda return str_sprintf("Soll: %.1f°C", x);
+          text: !lambda |-
+            return str_sprintf("Soll: %.1f°C", x);
       - lvgl.slider.update:
           id: slider_schlafzimmer
-          value: !lambda return x;
+          value: !lambda |-
+            return x;
   
   - platform: homeassistant
     entity_id: sensor.schlafzimmer_heizung_battery
@@ -100,7 +111,8 @@ sensor:
     on_value:
       - lvgl.label.update:
           id: label_schlafzimmer_battery
-          text: !lambda return str_sprintf("🔋 %.0f%%", x);
+          text: !lambda |-
+            return str_sprintf("🔋 %.0f%%", x);
 
 # Binary Sensor für Heizzustand
 binary_sensor:
@@ -186,7 +198,8 @@ lvgl:
                         service: climate.set_temperature
                         data:
                           entity_id: climate.wohnzimmer_heizung
-                          temperature: !lambda return x;
+                          temperature: !lambda |-
+                            return x;
         
         # Büro Markus Heizung
         - obj:
@@ -240,7 +253,8 @@ lvgl:
                         service: climate.set_temperature
                         data:
                           entity_id: climate.buro_markus_heizung
-                          temperature: !lambda return x;
+                          temperature: !lambda |-
+                            return x;
         
         # Schlafzimmer Heizung
         - obj:
@@ -294,7 +308,8 @@ lvgl:
                         service: climate.set_temperature
                         data:
                           entity_id: climate.schlafzimmer_heizung
-                          temperature: !lambda return x;
+                          temperature: !lambda |-
+                            return x;
       
       on_load:
         - lvgl.label.update:
