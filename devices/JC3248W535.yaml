@@ -36,6 +36,8 @@ touchscreen:
     i2c_id: touch_i2c
     interrupt_pin: GPIO4
     reset_pin: GPIO38
+    # Touchscreen-Fehler ignorieren, damit Display trotzdem funktioniert
+    setup_priority: -100
     on_touch:
       - lambda: |-
           ESP_LOGI("touch", "Touch at (%d, %d)", touch.x, touch.y);
